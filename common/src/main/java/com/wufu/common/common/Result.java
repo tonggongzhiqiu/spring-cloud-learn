@@ -1,4 +1,4 @@
-package com.wufu.producer.common;
+package com.wufu.common.common;
 
 import lombok.Data;
 import org.apache.http.HttpStatus;

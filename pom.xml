@@ -17,6 +17,7 @@
     <modules>
         <module>producer_8000</module>
         <module>consumer_9000</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -26,10 +27,23 @@
         <httpcore.version>4.4.13</httpcore.version>
         <lombok.version>1.18.12</lombok.version>
         <java.version>1.8</java.version>
+
+        <common.version>0.0.1-SNAPSHOT</common.version>
+        <producer8000.version>0.0.1-SNAPSHOT</producer8000.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.wufu</groupId>
+                <artifactId>producer</artifactId>
+                <version>${producer8000.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wufu</groupId>
+                <artifactId>common</artifactId>
+                <version>${common.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>

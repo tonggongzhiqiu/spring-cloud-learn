@@ -1,7 +1,7 @@
 package com.wufu.consumer.controller;
 
-import com.wufu.producer.common.Result;
 import com.wufu.producer.entity.ProducerUser;
+import com.wufu.common.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
