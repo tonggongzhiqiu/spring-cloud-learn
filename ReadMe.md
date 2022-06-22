@@ -21,6 +21,7 @@
 2. 实现了在 eureka-server 中注册 eureka-client 服务；实现在 eureka-security-server 中注册 eureka-client 服务
 3. 实现了负载均衡功能，主要是通过 RestTemplate
 4. 实现 Hystrix 的服务降级功能，请求缓存，合并请求
+5. 实现 Hystrix Dashboard 监控 Hystrix-service 单个服务
 
 # 流程
 1. eureka-security-server 中注册 eureka-client 服务
@@ -42,6 +43,11 @@
         4. 使用 @CacheRemove 去除请求缓存
     4. Hystrix 请求合并 使用 @HystrixCollapser
     
+4. Hystrix DashBoard 使用
+    1. 使用 @EnableHystrixDashboard 开启 HystrixDashboard
+    2. yml 中配置 proxy-stream-allow-list
+    3. 在要监控的服务（hystrix-service） 中配置 management.endpoints.web.exposure.include
+    4. 调用 hystrix-service 中的服务，即可在 hystrix dashboard 中出现监控
 
 # 问题
 1. 使用 Hystrix 合并请求时，第三次请求会触发错误，具体如下

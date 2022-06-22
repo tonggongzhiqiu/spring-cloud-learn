@@ -12,6 +12,7 @@
         <module name="producer_8000" />
         <module name="common" />
         <module name="eureka-client" />
+        <module name="hystrix-dashboard" />
         <module name="ribbon-service" />
         <module name="user-service" />
         <module name="eureka-server" />
@@ -29,6 +30,7 @@
       <module name="eureka-client" options="-parameters" />
       <module name="eureka-security-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="hystrix-dashboard" options="-parameters" />
       <module name="hystrix-service" options="-parameters" />
       <module name="producer_8000" options="-parameters" />
       <module name="ribbon-service" options="-parameters" />
