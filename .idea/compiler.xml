@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="hystrix-service" />
         <module name="eureka-security-server" />
         <module name="producer_8000" />
         <module name="common" />
@@ -28,6 +29,7 @@
       <module name="eureka-client" options="-parameters" />
       <module name="eureka-security-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="hystrix-service" options="-parameters" />
       <module name="producer_8000" options="-parameters" />
       <module name="ribbon-service" options="-parameters" />
       <module name="spring-cloud-nacos-consumer" options="-parameters" />

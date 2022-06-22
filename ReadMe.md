@@ -20,6 +20,8 @@
 1. 实现了两个简单的功能模块，producer 提供服务，consumer 通过 RestTemplate 进行服务调用
 2. 实现了在 eureka-server 中注册 eureka-client 服务；实现在 eureka-security-server 中注册 eureka-client 服务
 3. 实现了负载均衡功能，主要是通过 RestTemplate
+4. 实现 Hystrix 的服务降级功能，请求缓存，合并请求
+
 # 流程
 1. eureka-security-server 中注册 eureka-client 服务
    在 eureka-security-server 中主要是比普通的 eureka-server 配置了 security 信息；  
@@ -29,3 +31,21 @@
 2. ribbon-service 如何提供负载均衡
    1. 在 RibbonConfig 中配置 RestTemplate Bean，并添加 LoadBalanced 注解，提供负载均衡
    2. 在 Controller 中通过 RestTemplate 远程调用 user-service 中的具体服务
+    
+3. Hystrix 服务容错保护的实现
+    1. 服务降级：当被调用的服务出现故障时，指定一个服务降级处理方法（当 user-service 出现故障时，执行了 fallbackMethod 指定的方法）
+    2. 使用 ignoreException 忽略某些异常，不发生服务降级
+    3. Hystrix 请求缓存
+        1. 自定义 Filter，在其中初始化 HystrixRequestContext 对象
+        2. 使用 @CacheResult 开启请求缓存
+        3. Controller 多个相同请求，除了第一次调用了 service，后边直接使用的缓存
+        4. 使用 @CacheRemove 去除请求缓存
+    4. Hystrix 请求合并 使用 @HystrixCollapser
+    
+
+# 问题
+1. 使用 Hystrix 合并请求时，第三次请求会触发错误，具体如下
+> Failed to map all collapsed requests to response. The expected contract has not been respected. Collapser key: 'getUserFuture', requests size: '2', response size: '1'  
+> https://blog.csdn.net/xiao_jun_0820/article/details/78423985
+
+有一篇博文中提到了这个错误，但是还没太理解怎么解决
