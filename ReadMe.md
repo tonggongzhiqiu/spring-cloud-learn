@@ -15,6 +15,11 @@
    - eureka-server eureka 注册中心
    - user-service 提供具体服务
    - ribbon-service 支持负载均衡，调用 user-service 服务
+- Spring cloud Hystrix && Hystrix Dashboard
+    - hystrix-service 提供服务降级、请求缓存、请求合并
+    - hystrix-dashboard 提供对单个实例的监控
+- Open Feign 模块
+    - feign-service 使用 Feign 实现负载均衡的服务调用
     
 # 功能实现
 1. 实现了两个简单的功能模块，producer 提供服务，consumer 通过 RestTemplate 进行服务调用
@@ -22,6 +27,7 @@
 3. 实现了负载均衡功能，主要是通过 RestTemplate
 4. 实现 Hystrix 的服务降级功能，请求缓存，合并请求
 5. 实现 Hystrix Dashboard 监控 Hystrix-service 单个服务
+6. 实现基于 Open Feign 的负载均衡服务调用
 
 # 流程
 1. eureka-security-server 中注册 eureka-client 服务
@@ -48,6 +54,11 @@
     2. yml 中配置 proxy-stream-allow-list
     3. 在要监控的服务（hystrix-service） 中配置 management.endpoints.web.exposure.include
     4. 调用 hystrix-service 中的服务，即可在 hystrix dashboard 中出现监控
+
+5. Open Feign 实现负载均衡的服务调用步骤
+    1. 主启动类配置 @EnableFeignClients 启用 Feign 客户端
+    2. Service 接口层通过 @FeignClient(value="service-name") 绑定具体调用的服务实现
+    3. 启动多个 service-name 服务，并调用 Feign-service 中的接口，即可观察到负载均衡的情况
 
 # 问题
 1. 使用 Hystrix 合并请求时，第三次请求会触发错误，具体如下
