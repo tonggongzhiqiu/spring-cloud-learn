@@ -27,7 +27,8 @@
 3. 实现了负载均衡功能，主要是通过 RestTemplate
 4. 实现 Hystrix 的服务降级功能，请求缓存，合并请求
 5. 实现 Hystrix Dashboard 监控 Hystrix-service 单个服务
-6. 实现基于 Open Feign 的负载均衡服务调用
+6. 实现基于 Open Feign 的负载均衡服务调用，实现服务降级
+7. 开启 Open Feign 的日志功能
 
 # 流程
 1. eureka-security-server 中注册 eureka-client 服务
@@ -64,6 +65,10 @@
     1. 实现 UserFallbackService 并通过 @Component 注入
     2. UserService 接口 @Feign-Client 中配置 fallback
     3. yml 中配置 feign.circuitbreaker.enabled=true; 引入 circuitvreaker-resilience4j 依赖
+    
+7. Open Feign 开启日志
+    1. 实现 FeignConfig
+    2. 开启 logging.level.xxx.UserService: debug
 
 # 问题
 1. 使用 Hystrix 合并请求时，第三次请求会触发错误，具体如下
