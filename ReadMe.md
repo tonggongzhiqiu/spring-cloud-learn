@@ -59,6 +59,11 @@
     1. 主启动类配置 @EnableFeignClients 启用 Feign 客户端
     2. Service 接口层通过 @FeignClient(value="service-name") 绑定具体调用的服务实现
     3. 启动多个 service-name 服务，并调用 Feign-service 中的接口，即可观察到负载均衡的情况
+    
+6. Open Feign 实现服务降级
+    1. 实现 UserFallbackService 并通过 @Component 注入
+    2. UserService 接口 @Feign-Client 中配置 fallback
+    3. yml 中配置 feign.circuitbreaker.enabled=true; 引入 circuitvreaker-resilience4j 依赖
 
 # 问题
 1. 使用 Hystrix 合并请求时，第三次请求会触发错误，具体如下
@@ -66,3 +71,21 @@
 > https://blog.csdn.net/xiao_jun_0820/article/details/78423985
 
 有一篇博文中提到了这个错误，但是还没太理解怎么解决
+
+2. Open Feign 实现服务降级的问题
+   
+> stack overflow 原帖：https://stackoverflow.com/questions/69524571/spring-cloud-openfeign-3-0-1-fallback-not-being-triggered
+    
+由于 FeignService 模块使用的 Spring cloud 的版本是 2021.0.3，这个版本并不支持 hystrix，为了开启 fallback 功能，需要以下两点：
+   1. Enable property: feign.circuitbreaker.enabled=true   
+   2. Add dependency to Spring Cloud CircuitBreaker, which will handle configured fallbacks.
+    
+```yml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+</dependency>
+```
+
+# todo list
+1. 项目模块中 spring cloud 版本不统一

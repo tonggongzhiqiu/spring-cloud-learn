@@ -3,8 +3,9 @@ package com.wufu.cloud.controller;
 import com.wufu.cloud.common.CommonResult;
 import com.wufu.cloud.common.User;
 import com.wufu.cloud.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author wufu
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserFeignController {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     @GetMapping("/{id}")
