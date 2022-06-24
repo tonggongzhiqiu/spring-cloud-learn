@@ -12,7 +12,7 @@ eureka:
 spring:
   application:
     name: zuul-proxy
-
+# 默认路由配置
 zuul:
   routes:
     user-service:
@@ -20,7 +20,7 @@ zuul:
     feign-service:
       path: /feignService/**
   prefix: /proxy
-
+# 监控信息
 management:
   endpoints:
     web:

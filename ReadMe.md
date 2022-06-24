@@ -29,6 +29,7 @@
 5. 实现 Hystrix Dashboard 监控 Hystrix-service 单个服务
 6. 实现基于 Open Feign 的负载均衡服务调用，实现服务降级
 7. 开启 Open Feign 的日志功能
+8. 实现 Zuul 路由功能，使用 actuator 监控
 
 # 流程
 1. eureka-security-server 中注册 eureka-client 服务
@@ -69,6 +70,11 @@
 7. Open Feign 开启日志
     1. 实现 FeignConfig
     2. 开启 logging.level.xxx.UserService: debug
+    
+8. Zuul 网关服务：路由
+    1. 添加 zuul 依赖，  
+    2. 配置文件中配置路由信息（主要是这里的配置内容）
+    3. @EnableZuulProxy 开启服务
 
 # 问题
 1. 使用 Hystrix 合并请求时，第三次请求会触发错误，具体如下
