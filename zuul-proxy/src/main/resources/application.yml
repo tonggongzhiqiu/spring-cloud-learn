@@ -1,7 +1,6 @@
 server:
   port: 8801
 
-
 eureka:
   client:
     register-with-eureka: true

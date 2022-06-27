@@ -30,6 +30,7 @@
 6. 实现基于 Open Feign 的负载均衡服务调用，实现服务降级
 7. 开启 Open Feign 的日志功能
 8. 实现 Zuul 路由功能，使用 actuator 监控
+9. 实现 Zuul 过滤器功能
 
 # 流程
 1. eureka-security-server 中注册 eureka-client 服务
@@ -76,6 +77,8 @@
     2. 配置文件中配置路由信息（主要是这里的配置内容）
     3. @EnableZuulProxy 开启服务
 
+9. Zuul 过滤器功能
+    自定义 filter 类继承 ZuulFilter
 # 问题
 1. 使用 Hystrix 合并请求时，第三次请求会触发错误，具体如下
 > Failed to map all collapsed requests to response. The expected contract has not been respected. Collapser key: 'getUserFuture', requests size: '2', response size: '1'  
@@ -98,5 +101,13 @@
 </dependency>
 ```
 
+# 组件介绍
+1. OpenFeign 
+   OpenFeign 是一种声明式、模块化的 Http 客户端。声明式调用：就像调用本地方法一样调用远程方法（类似 RPC）。 
+   使用 OpenFeign 之后，可以不使用 RestTemplate 进行调用。
+
+2. Zuul
+    Zuul 作为微服务的 API 网关（为服务提供统一的访问入口）使用，支持动态路由和过滤功能。  
+   Zuul 自动集成了 Ribbon 和 Hystrix，所以 Zuul 具有负载均衡和服务容错能力
 # todo list
 1. 项目模块中 spring cloud 版本不统一
